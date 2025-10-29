@@ -1,0 +1,7 @@
+# Ignore YOLO weights and other large model files
+*.weights
+*.pt
+*.onnx
+__pycache__/
+uploads/
+results/
