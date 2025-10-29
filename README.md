@@ -124,6 +124,3 @@ results/
 ---
 
 **Author:**  Deepa
-
-**Purpose:** Technical Assessment – Object Detection Microservice
-
