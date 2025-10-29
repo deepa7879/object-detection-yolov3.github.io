@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Object Detection</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f5f7fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+```
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 25px;
+  text-align: center;
+  max-width: 500px;
+}
+
+form {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+input[type="file"] {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #0078d7;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+.return-home {
+  background-color: #e0e6ed;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.return-home:hover {
+  background-color: #cfd8e3;
+}
+
+img {
+  margin-top: 20px;
+  max-width: 80%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.detections {
+  margin-top: 20px;
+  text-align: left;
+  background: #fff;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 80%;
+  max-width: 500px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #eef3fa;
+  margin: 5px 0;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+}
+```
+
+  </style>
+</head>
+<body>
+  <h2>🔍 Object Detection</h2>
+  <p>Upload an image and get an annotated result with bounding boxes and detection JSON.</p>
+
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required>
+    <br>
+    <button type="submit">Detect Objects</button>
+  </form>
+
+{% if image_url %} <h3>Detected Image:</h3> <img src="{{ image_url }}" alt="Detected output image"> <br> <a href="/" class="return-home">🏠 Return to Home</a>
+{% endif %}
+
+{% if detections %} <div class="detections"> <h3>Detections:</h3> <ul>
+{% for det in detections %} <li>{{ det.class }} (Confidence: {{ "%.2f"|format(det.confidence) }})</li>
+{% endfor %} </ul> </div>
+{% endif %}
+
+  <footer>
+    <p><b>Model:</b> YOLOv3 (CPU)<br>
+    <b>Built by:</b> Deepa </p>
+    <a href="/" class="return-home">🔁 Return to Home</a>
+  </footer>
+</body>
+</html>
